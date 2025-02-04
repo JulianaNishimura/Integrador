@@ -6,6 +6,9 @@ function mostrarSubmenu(tipo) {
         document.getElementById("submenu-mapa").style.display = "block";
         document.getElementById("informacao").innerHTML = "";
         document.getElementById("map").style.display = "none";
+    } else{
+        document.getElementById("submenu-mapa").style.display = "none";
+        document.getElementById("map").style.display = "none";
     }
 }
 
@@ -58,10 +61,12 @@ function mostrarLoading(show) {
 // Função para mostrar outras informações (regras, contatos, etc.)
 function mostrarInformacoes(tipo) {
     mostrarLoading(true);
+    mostrarSubmenu(tipo);
     setTimeout(function() {
         let conteudo = '';
         if (tipo === 'regras') {
             conteudo = `
+                <div id='regras'>
                 <h2>Regras Básicas</h2>
                 <ul>
                     <li><img src="imagens/relogio.png" style="width: 20px; height: 20px; margin-right: 10px;">Respeitar os horários.</li>
@@ -70,29 +75,33 @@ function mostrarInformacoes(tipo) {
                     <li><img src="imagens/logo.png" style="width: 20px; height: 20px; margin-right: 10px;">Utilizar uniforme e crachá todos os dias.</li>
                     <p>O uso do uniforme e crachá, em lugar visível, faz parte das regras indiscutíveis do SENAI.</p>
                 </ul>
+                </div>
             `;
         } else if (tipo === 'contatos') {
             conteudo = `
+                <div id='contatos'>
                 <h1>Contatos do SENAI</h1>
                 <h3>Dona Carla (ou Carlinha) - Setor de Apoio</h3>
                 <p>+55 16 2106-8723</p>
 
                 <h3>Marília - Setor de Apoio</h3>
                 <p>+55 16 98159-0197</p>
+                </div>
             `;
         } else if (tipo === 'duvidas') {
             conteudo = `
+            <div id='duvidas'>
             <h1>Dúvidas Frequentes</h1>
             <h3>1. O que é setor de apoio?</h3>
             <p>O setor de apoio é, literalmente, um local de apoio e acolhimento ao aluno. Você pode e deve procurá-lo sempre que tiver dúvidas sobre o funcionamento da escola. Além disso, em caso de problemas, sempre notifique o setor de apoio. Lá, você receberá orientações sobre o que fazer.</p>
             <p>Resumidamente, é um local onde você poderá ir sem medo de julgamentos. O acolhimento é certo!</p>
             <h3>2. Posso usar o celular fora do horário de aula?</h3>"
             <p>Não. Devido a preocupação dos docentes da escola com seus alunos, é permitido usar o celular na estrada e saída. Porém, o uso em sala de aula ou intervalos é, e continua sendo, extritamente proibida!<p>
-
-            ;`
+            </div>
+            `;
 
         } else if (tipo === 'apoio') {
-            conteudo = "<h2>Contato de Apoio</h2><p>Para qualquer ajuda, entre em contato pelo e-mail <a href='mailto:support@senai.com.br'>support@senai.com.br</a></p>";
+            conteudo = "<div id='apoio'><h2>Contato de Apoio</h2><p>Para qualquer ajuda, entre em contato pelo e-mail <a href='mailto:support@senai.com.br'>support@senai.com.br</a></p></div>";
         }
 
         document.getElementById("informacao").innerHTML = conteudo;
@@ -114,5 +123,5 @@ window.onload = function() {
         currentIndex = (currentIndex + 1) % images.length;
         
         images[currentIndex].classList.add('active');
-    }, 6000); // 6000 = 6 seg
+    }, 2000); // 6000 = 6 seg
 };
